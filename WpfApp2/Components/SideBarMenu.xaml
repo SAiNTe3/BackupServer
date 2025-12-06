@@ -57,17 +57,17 @@
                 <Button Style="{StaticResource MenuButtonStyle}" Click="ServerPanelButton_Click">
                     <TextBlock Text="服务器面板" FontSize="16"/>
                 </Button>
-                <Button Style="{StaticResource MenuButtonStyle}">
+                <Button Style="{StaticResource MenuButtonStyle}" Click="SettingsButton_Click">
                     <TextBlock Text="设置" FontSize="16"/>
                 </Button>
                 <Button Style="{StaticResource MenuButtonStyle}">
                     <TextBlock Text="本地浏览" FontSize="16"/>
                 </Button>
                 <Button Style="{StaticResource MenuButtonStyle}">
-                    <TextBlock Text="漫游" FontSize="16"/>
+                    <TextBlock Text="选项" FontSize="16"/>
                 </Button>
                 <Button Style="{StaticResource MenuButtonStyle}">
-                    <TextBlock Text="关注" FontSize="16"/>
+                    <TextBlock Text="选项" FontSize="16"/>
                 </Button>
             </StackPanel>
         </Grid>

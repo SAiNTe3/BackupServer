@@ -26,11 +26,31 @@ namespace BackupServer {
         public MainWindow() {
             InitializeComponent();
             this.Closing += MainWindow_Closing;
+            this.Loaded += MainWindow_Loaded;
+        }
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e) {
+            ServerViewInitialize();
         }
         private void ServerViewInitialize() {
             serverView=new ServerView();
-            sideBarMenu = new SideBarMenu();
-            sideBarMenu.NavigationRequest += OnNavigationRequested;
+            var sideBarMenuControl = FindVisualChild<SideBarMenu>(this);
+            if (sideBarMenuControl != null) {
+                sideBarMenuControl.NavigationRequest += OnNavigationRequested;
+            }
+        }
+        private T FindVisualChild<T>(DependencyObject parent) where T : DependencyObject {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++) {
+                DependencyObject child = VisualTreeHelper.GetChild(parent, i);
+                if (child != null && child is T) {
+                    return (T)child;
+                }
+                else {
+                    T childOfChild = FindVisualChild<T>(child);
+                    if (childOfChild != null)
+                        return childOfChild;
+                }
+            }
+            return null;
         }
         private void OnNavigationRequested(object sender, string viewName) {
             // 根据viewName切换不同的视图
@@ -39,7 +59,7 @@ namespace BackupServer {
                     ShowServerView();
                     break;
                 case "Settings":
-                    //ShowSettingsView();
+                    ShowSettingsView();
                     break;
                 case "LocalBrowse":
                     //ShowLocalBrowseView();
@@ -61,6 +81,11 @@ namespace BackupServer {
             }
             MainContentControl.Content = serverView;
             StatusTextBlock.Text = "服务器面板";
+        }
+        private void ShowSettingsView() {
+            var settingsView = new SettingsView();
+            MainContentControl.Content = settingsView;
+            StatusTextBlock.Text = "设置";
         }
         private void MainWindow_Closing(object sender, CancelEventArgs e)
         {

@@ -28,15 +28,10 @@
                         <RowDefinition Height="80"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-
+                    <components:SearchBar Grid.Row="0"/>
                     <ContentControl x:Name="MainContentControl" Grid.Row="1">
-                        <!-- 默认显示 ServerView -->
                         <components:ServerView/>
                     </ContentControl>
-
-                    <!-- 添加 ServerView 组件 -->
-                    <components:ServerView x:Name="ServerView" Grid.Row="1"/>
-
                 </Grid>
             </Border>
         </Grid>
